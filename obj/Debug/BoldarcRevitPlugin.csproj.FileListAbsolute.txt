@@ -1,0 +1,7 @@
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\bin\Debug\BoldarcRevitPlugin.dll
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\bin\Debug\BoldarcRevitPlugin.pdb
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\bin\Debug\BoldarcManagedFbx.dll
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\bin\Debug\BoldarcManagedFbx.pdb
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\obj\Debug\BoldarcRevitPlugin.csprojResolveAssemblyReference.cache
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\obj\Debug\BoldarcRevitPlugin.dll
+D:\Joel\Projects\BoldarcRevitPlugin\BoldarcRevitPlugin\obj\Debug\BoldarcRevitPlugin.pdb
