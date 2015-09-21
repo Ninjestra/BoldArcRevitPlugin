@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BoldarcManagedFbx;
 using Autodesk.Revit.DB;
 
@@ -15,7 +12,7 @@ namespace BoldarcRevitPlugin
         {
             m_pFileExporter = new FileExporter();
         }
-        public void ExportFbx(IList<XYZ> inVertices, IList<PolymeshFacet> inIndices)
+        public void AddGeometry(IList<XYZ> inVertices, IList<PolymeshFacet> inIndices)
         {
             List<Vector3> _lVertices = new List<Vector3>(inVertices.Count);
             foreach (XYZ _vert in inVertices)
@@ -30,8 +27,17 @@ namespace BoldarcRevitPlugin
                 _lIndices.Add(_ind.V2);
                 _lIndices.Add(_ind.V3);
             }
-            m_pFileExporter.SetGeometry(_lVertices, _lIndices);
+            //Mesh _Mesh = new Mesh();
+            //_Mesh.AddGeometry(_lVertices, _lIndices);
+            //m_pFileExporter.AddMesh(_Mesh);
+            m_pFileExporter.AddGeometry(_lVertices, _lIndices);
+            
+        }
+        public void ExportFbx()
+        {
             m_pFileExporter.ExportFile();
         }
+
+       
     }
 }
