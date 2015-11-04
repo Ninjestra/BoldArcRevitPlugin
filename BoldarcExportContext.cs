@@ -39,7 +39,7 @@ namespace BoldarcRevitPlugin
 
         public BoldarcExportContext(Document inDocument) 
         {
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+            //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
             m_Document = inDocument;
             m_Exporter = new FbxExporter();
             m_stackTransform = new Stack<Transform>();
@@ -73,6 +73,7 @@ namespace BoldarcRevitPlugin
         {
             m_Exporter.ExportFbx();
             //Process.Start(@"D:\Program Files\Blender Foundation\Blender\blender.exe", @"-b --python D:\Joel\Scripts\python\Blender\RevitUnrealBridge.py -- D:\Joel\FBX\exporter_test.fbx");
+            //Process.Start(@"D:/Joel/GitHub/Unreal/first/Binaries/Win64/first-Win64-DebugGame.exe", "-FBX=D:\\Joel\\FBX\\exporter_test.fbx");
         }
         public bool IsCanceled() { return false; }
         public RenderNodeAction OnViewBegin(ViewNode inNode) { return 0; }
@@ -95,8 +96,10 @@ namespace BoldarcRevitPlugin
            // }
          //   if (CurrentElement.Category == )
           //  {
+        
             String _name = CurrentElement.Category.Name + "_0_" + CurrentElement.Name;
             m_Exporter.BeginMesh(_name);
+
             return RenderNodeAction.Proceed;
           //  }
            // else
@@ -113,6 +116,7 @@ namespace BoldarcRevitPlugin
         public RenderNodeAction OnInstanceBegin(InstanceNode inNode) 
         {
             m_stackTransform.Push(m_stackTransform.Peek().Multiply(inNode.GetTransform()));
+            m_Exporter.AddTransform(m_stackTransform.Peek());
             return RenderNodeAction.Proceed; 
         }
         public void OnInstanceEnd(InstanceNode inNode) 
@@ -126,9 +130,14 @@ namespace BoldarcRevitPlugin
         public void OnRPC(RPCNode inNode) { }
         public void OnLight(LightNode inNode) { }
         public void OnDaylightPortal(DaylightPortalNode inNode) { }
-        public void OnMaterial(MaterialNode inNode) { }
 
-        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        public void OnMaterial(MaterialNode inNode)
+        {
+            //if(inNode.HasOverriddenAppearance) 
+           m_Exporter.AddMaterial(m_Document, inNode);
+        }
+
+        /*private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (args.Name.ToUpper().StartsWith("BOLDARCMANAGED"))
             {
@@ -142,6 +151,6 @@ namespace BoldarcRevitPlugin
             }
             else
                 return Assembly.GetExecutingAssembly();
-        }
+        }*/
     }
 }
